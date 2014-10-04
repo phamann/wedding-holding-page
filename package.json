@@ -18,5 +18,8 @@
   "homepage": "https://github.com/phamann/wedding",
   "dependencies": {
     "express": "^4.9.5"
+  },
+  "engines": {
+    "node": "0.10.x"
   }
 }
