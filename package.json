@@ -1,0 +1,22 @@
+{
+  "name": "wedding-website",
+  "version": "0.0.0",
+  "description": "open-source over-engineered wedding website",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/phamann/wedding.git"
+  },
+  "keywords": [
+    "wedding"
+  ],
+  "author": "Patrick Hamann",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/phamann/wedding/issues"
+  },
+  "homepage": "https://github.com/phamann/wedding",
+  "dependencies": {
+    "express": "^4.9.5"
+  }
+}
