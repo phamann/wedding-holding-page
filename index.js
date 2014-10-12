@@ -1,14 +1,39 @@
-var express = require('express')
-var app = express();
-var cool = require('cool-ascii-faces');
+var path = require('path');
+var koala = require('./lib');
+var spdy = require('spdy');
+var keys = require('spdy-keys');
+var fs = require('fs');
 
-app.set('port', (process.env.PORT || 5000))
-app.use(express.static(__dirname + '/public'))
+var PORT = process.env.PORT || 5000;
+var ENV = process.env.NODE_ENV || 'development';
 
-app.get('/', function(request, response) {
-  response.send("Hello staging world " + cool());
-})
+var app = koala({
+    fileServer: {
+        root: __dirname + '/dist/',
+        index: true,
+        maxAge: '1 year'
+    }
+});
 
-app.listen(app.get('port'), function() {
-  console.log("Node app is running at localhost:" + app.get('port'))
-})
+//app.get('/', function *(next) {
+//    yield* this.fileServer.send('index.html');
+//    if (this.isSpdy) {
+//        yield* this.fileServer.push('css/global.css');
+//        yield* this.fileServer.push('js/circles.js');
+//    }
+//});
+
+//var server = spdy.createServer({
+//    key: fs.readFileSync('server.key'),
+//    cert: fs.readFileSync('server.crt'),
+//    ca: fs.readFileSync('server.csr')
+//}, app.callback());
+
+//var server = spdy.createServer(keys, app.callback());
+//
+//server.listen(PORT);
+
+app.listen(PORT);
+
+console.log('Listening on port: ' + PORT);
+console.log('Running app in environment: ' + ENV);
