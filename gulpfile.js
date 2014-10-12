@@ -20,7 +20,7 @@ gulp.task('template', function() {
        .pipe(gulp.dest(DIST));
 });
 
-gulp.task('sass', function () {
+gulp.task('sass', ['svgo'], function () {
     gulp.src(SRC + 'css/**/*.scss')
         .pipe(sass())
         .pipe(base64({
@@ -48,5 +48,5 @@ gulp.task('watch', function() {
     gulp.watch('template/**/*', ['template']);
 });
 
-gulp.task('dist', ['template', 'svgo', 'sass', 'js']);
-gulp.task('default', ['template', 'svgo', 'sass', 'js', 'watch']);
+gulp.task('dist', ['template', 'sass', 'js']);
+gulp.task('default', ['template', 'sass', 'js', 'watch']);

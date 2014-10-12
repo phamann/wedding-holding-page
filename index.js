@@ -1,6 +1,5 @@
 var path = require('path');
 var koala = require('./lib');
-var koala = require('./lib');
 
 var fs = require('fs');
 
