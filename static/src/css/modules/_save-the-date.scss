@@ -1,0 +1,85 @@
+#circles {
+    z-index: 1;
+}
+
+.save-the-date {
+    @include box-sizing(border-box);
+    position: relative;
+    z-index: 2;
+    max-width: 300px;
+    padding: 20px;
+    margin: 20px auto;
+    text-align: center;
+
+     &:after {
+         position: absolute;
+         top: 0;
+         left: 0;
+         content: ' ';
+         width: 100%;
+         height: 100%;
+         background-color: rgba(255, 255, 255, 0.2);
+         @include blur(5px);
+     }
+
+    @media (min-width: 600px) {
+        max-width: 440px;
+    }
+}
+
+.save-the-date__logo {
+    display: block;
+    width: 200px;
+    height: 157px;
+    text-indent: -9999px;
+    background-image: url('img/save-the-date.svg');
+    background-size: 100%;
+
+    @media (min-width: 600px) {
+        width: 400px;
+        height: 315px;
+    }
+}
+
+.save-the-date__desc {
+    position: relative;
+    color: #fff;
+    font-family: $f-sans;
+}
+
+.desc__location {
+    position: relative;
+    padding: 0;
+    margin: 0 0 10px;
+    font-style: normal;
+
+    &:after {
+        position: absolute;
+        right: 25%;
+        top: 22px;
+        display: block;
+        height: 1px;
+        width: 50%;
+        content: ' ';
+        background-color: #fff;
+    }
+}
+
+.desc__date {
+    margin: 0;
+    padding: 0;
+    font-size: 26px;
+    text-transform: uppercase;
+}
+
+.desc__name {
+    margin-top: 0;
+    font-weight: normal;
+}
+
+.desc__invite {
+    margin: 0;
+    padding: 0;
+    font-size: 0.8em;
+    font-style: italic;
+}
