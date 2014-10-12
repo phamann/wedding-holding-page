@@ -48,4 +48,5 @@ gulp.task('watch', function() {
     gulp.watch('template/**/*', ['template']);
 });
 
+gulp.task('dist', ['template', 'svgo', 'sass', 'js']);
 gulp.task('default', ['template', 'svgo', 'sass', 'js', 'watch']);

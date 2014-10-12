@@ -50,6 +50,8 @@
   },
   "main": "index.js",
   "scripts": {
+    "postinstall": "npm run build",
+    "build": "gulp dist",
     "start": "node --harmony index.js"
   },
   "files": [
