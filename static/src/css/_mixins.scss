@@ -1,0 +1,13 @@
+@mixin blur($i) {
+    filter: blur($i);
+    -webkit-filter: blur($i);
+    -moz-filter: blur($i);
+    -o-filter: blur($i);
+    -ms-filter: blur($i);
+    filter: url(img/blur.svg#blur);
+}
+
+@mixin box-sizing($sizing) {
+    -moz-box-sizing: $sizing;
+    box-sizing: $sizing;
+}
