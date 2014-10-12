@@ -48,7 +48,10 @@
     "spdy": "^1.29.0",
     "spdy-push": "^1.0.0"
   },
-  "main": "lib",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --harmony --use_strict --harmony_generators index.js"
+  },
   "files": [
     "lib",
     "bin",
