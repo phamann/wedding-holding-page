@@ -59,7 +59,7 @@
     "template"
   ],
   "engines": {
-    "node": "0.11.x"
+     "node": "^0.11.9"
   },
   "devDependencies": {
     "browser-sync": "^1.5.7",
