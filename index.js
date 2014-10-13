@@ -10,7 +10,7 @@ var app = koala({
     fileServer: {
         root: __dirname + '/dist/',
         index: true,
-        maxage: 3600000
+        maxage: 36000000
     }
 });
 
