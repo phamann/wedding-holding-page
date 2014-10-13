@@ -15,6 +15,17 @@
         return COLOURS[getRandomInt(1, COLOURS.length) - 1];
     }
 
+    function debounce(fn, delay) {
+        var timer = null;
+        return function () {
+            var context = this, args = arguments;
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                fn.apply(context, args);
+            }, delay);
+        };
+    }
+
     function Circle() {
         this.x = getRandomInt(0, W);
         this.y = getRandomInt(0, H);
@@ -60,10 +71,11 @@
         document.body.appendChild(svg);
     }
 
+    drawCircles();
     setInterval(drawCircles, 1000);
 
-    window.addEventListener("resize", function(e) {
+    window.addEventListener("resize", debounce(function() {
         drawCircles();
-    }, false);
+    }, 200), false);
 
 })();
