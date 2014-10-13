@@ -30,6 +30,6 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="/js/circles.js" async></script>
+    <script>!function(){"use strict";function t(t,e){return Math.floor(Math.random()*(e-t))+t}function e(){return l[t(1,l.length)-1]}function n(){this.x=t(0,d),this.y=t(0,s),this.fill=e(),this.el=document.createElementNS(u,"circle")}function i(){var t=document.createElementNS(u,"svg");return t.setAttributeNS(null,"id","circles"),t.setAttributeNS(null,"width","100%"),t.setAttributeNS(null,"height","100%"),t.setAttributeNS(null,"style","position:absolute; top: 0; left: 0;"),t}function r(){var t=i(d,s),e=document.getElementById("circles");e&&e.remove();for(var r=0;o>r;r++){var l=new n;t.appendChild(l.getEl())}document.body.appendChild(t)}var l=["#FAF197","#6DC2C2","#F1BEBB","#D83381","#D83381"],u="http://www.w3.org/2000/svg",o=window.innerWidth<600?5:10,d=Math.max(document.documentElement.clientWidth,window.innerWidth||0),s=Math.max(document.documentElement.clientHeight,window.innerHeight||0);n.prototype.updateAttr=function(t,e){this.el.setAttributeNS(null,t,e)},n.prototype.getEl=function(){return this.updateAttr("cx",this.x),this.updateAttr("cy",this.y),this.updateAttr("r",20),this.updateAttr("style","fill:"+this.fill),this.el},setInterval(r,1e3),window.addEventListener("resize",function(){r()},!1)}();</script>
 </body>
 </html>
