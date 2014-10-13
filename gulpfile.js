@@ -5,6 +5,7 @@ var base64 = require('gulp-base64');
 var uglify = require('gulp-uglify');
 var cssshrink = require('gulp-cssshrink');
 var livereload = require('gulp-livereload');
+var inject = require('gulp-inject');
 
 var SRC = './static/src/';
 var DIST = './dist/';
@@ -15,14 +16,24 @@ gulp.task('js', function() {
         .pipe(gulp.dest(DIST + 'js/'));
 });
 
-gulp.task('template', function() {
+gulp.task('template', ['sass'], function() {
    gulp.src('template/**/*')
+        .pipe(inject(gulp.src(DIST + 'css/head.css'), {
+            starttag: '<style>',
+            endtag: '</style>',
+            transform: function (filePath, file) {
+                return file.contents.toString('utf8')
+            }
+        }))
        .pipe(gulp.dest(DIST));
 });
 
 gulp.task('sass', ['svgo'], function () {
     gulp.src(SRC + 'css/**/*.scss')
-        .pipe(sass())
+        .pipe(sass({
+            outputStyle: 'compressed',
+            sourceComments: 'none'
+        }))
         .pipe(base64({
             baseDir: DIST,
             extensions: ['svg'],
@@ -48,5 +59,5 @@ gulp.task('watch', function() {
     gulp.watch('template/**/*', ['template']);
 });
 
-gulp.task('dist', ['template', 'sass', 'js']);
-gulp.task('default', ['template', 'sass', 'js', 'watch']);
+gulp.task('dist', ['sass', 'template', 'js']);
+gulp.task('default', ['sass', 'template', 'js', 'watch']);

@@ -10,17 +10,7 @@
     padding: 20px;
     margin: 20px auto;
     text-align: center;
-
-     &:after {
-         position: absolute;
-         top: 0;
-         left: 0;
-         content: ' ';
-         width: 100%;
-         height: 100%;
-         background-color: rgba(255, 255, 255, 0.2);
-         @include blur(5px);
-     }
+    background-color: rgba(255, 255, 255, 0.2);
 
     @media (min-width: 600px) {
         max-width: 440px;
