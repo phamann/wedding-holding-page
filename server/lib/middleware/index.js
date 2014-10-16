@@ -3,7 +3,7 @@
  * Attach middleware and such to the app.
  */
 
-var env = process.env.NODE_ENV || 'development';
+var config = require('../../config/config');
 
 /**
  * To do: make the handlers simply renderers,
@@ -24,7 +24,13 @@ module.exports = function (app, options) {
     // methods
     if (options.responseTime !== false) app.use(require('koa-response-time')());
     app.use(require('./trace'));
-    if (env !== 'production' && env !== 'test')  app.use(require('koa-logger')(options.logger));
+
+    if (config.app.env !== 'test') {
+        app.use(require('koa-logger')(options.logger));
+    }
+    if (config.app.env === 'development') {
+        app.use(require('koa-livereload')(options.livereload));
+    }
 
     app.use(require('koa-router')(app));
 

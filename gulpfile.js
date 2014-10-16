@@ -8,12 +8,25 @@ var livereload = require('gulp-livereload');
 var inject = require('gulp-inject');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
+var clean = require('gulp-clean');
 
-var SRC = './static/src/';
+var SRC = './static/';
 var DIST = './dist/';
 
-gulp.task('js', function() {
+gulp.task('clean', function () {
+    return gulp.src(DIST + '/*', {read: false})
+        .pipe(clean());
+});
+
+gulp.task('js', ['clean'], function() {
     gulp.src(SRC + 'js/**/*.js')
+        .pipe(uglify())
+        .pipe(gulp.dest(DIST + 'js/'));
+
+    gulp.src('jspm_packages/**/*.js')
+        .pipe(gulp.dest(DIST + 'js/packages/'));
+
+    gulp.src('config.js')
         .pipe(uglify())
         .pipe(gulp.dest(DIST + 'js/'));
 });
@@ -24,8 +37,11 @@ gulp.task('lint', function() {
         .pipe(jshint.reporter(stylish));
 });
 
-gulp.task('template', ['sass'], function() {
-   gulp.src('template/**/*')
+gulp.task('template', ['clean', 'sass'], function() {
+    gulp.src('client/**/*.html')
+        .pipe(gulp.dest(DIST));
+
+    gulp.src('template/**/*')
         .pipe(inject(gulp.src(DIST + 'css/head.css'), {
             starttag: '<style>',
             endtag: '</style>',
@@ -43,7 +59,7 @@ gulp.task('template', ['sass'], function() {
        .pipe(gulp.dest(DIST));
 });
 
-gulp.task('sass', ['svgo'], function () {
+gulp.task('sass', ['clean', 'svgo'], function () {
     gulp.src(SRC + 'css/**/*.scss')
         .pipe(sass({
             outputStyle: 'compressed',
@@ -58,7 +74,7 @@ gulp.task('sass', ['svgo'], function () {
         .pipe(gulp.dest(DIST + 'css/'));
 });
 
-gulp.task('svgo', function () {
+gulp.task('svgo', ['clean'], function () {
     gulp.src(SRC + 'img/**/*.svg')
         .pipe(svgo())
         .pipe(gulp.dest(DIST + 'img/'));
@@ -74,5 +90,5 @@ gulp.task('watch', function() {
     gulp.watch('template/**/*', ['template']);
 });
 
-gulp.task('dist', ['sass', 'template', 'js']);
-gulp.task('default', ['sass', 'template', 'lint', 'js', 'watch']);
+gulp.task('dist', ['clean', 'sass', 'template', 'js']);
+gulp.task('default', ['clean', 'sass', 'template', 'lint', 'js']);
